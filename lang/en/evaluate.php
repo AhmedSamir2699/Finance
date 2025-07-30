@@ -1,0 +1,50 @@
+<?php
+
+return [
+    'evaluation_saved' => 'Evaluation saved successfully',
+    'save_evaluation' => 'Save Evaluation',
+    'no_users_found' => 'No users found for evaluation',
+    'no_criteria_configured' => 'No evaluation criteria configured',
+    'contact_admin' => 'Please contact administrator to configure evaluation criteria',
+    'all_criteria_required' => 'All criteria must be evaluated',
+    'score_out_of_range' => 'Score out of range for :criteria',
+    'score_must_be_between' => 'Score must be between',
+    'and' => 'and',
+    'criteria' => [
+        'name' => 'Name',
+        'description' => 'Description',
+        'min_value' => 'Minimum Value',
+        'max_value' => 'Maximum Value',
+        'is_active' => 'Active',
+        'score_range' => 'Score Range',
+    ],
+    'scores' => [
+        'user' => 'User',
+        'criteria' => 'Criteria',
+        'score' => 'Score',
+        'evaluated_at' => 'Evaluation Date',
+        'actions' => 'Actions',
+    ],
+    'index' => [
+        'headline' => 'Evaluation History',
+        'create_evaluation' => 'Create Evaluation',
+    ],
+    'history' => [
+        'search' => 'Search',
+        'search_placeholder' => 'Search by user name or email...',
+        'date_filter' => 'Date Filter',
+        'criteria_filter' => 'Criteria Filter',
+        'user_filter' => 'User Filter',
+        'all_criteria' => 'All Criteria',
+        'all_users' => 'All Users',
+        'clear_filters' => 'Clear Filters',
+        'no_evaluations_found' => 'No evaluations found',
+        'table' => [
+            'user' => 'User',
+            'criteria' => 'Criteria',
+            'score' => 'Score',
+            'evaluated_at' => 'Evaluation Date',
+            'created_at' => 'Created At',
+        ],
+    ],
+]; 

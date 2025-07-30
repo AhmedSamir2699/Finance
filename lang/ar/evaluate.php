@@ -1,0 +1,50 @@
+<?php
+
+return [
+    'evaluation_saved' => 'تم حفظ التقييم بنجاح',
+    'save_evaluation' => 'حفظ التقييم',
+    'no_users_found' => 'لم يتم العثور على مستخدمين للتقييم',
+    'no_criteria_configured' => 'لم يتم تكوين معايير التقييم',
+    'contact_admin' => 'يرجى الاتصال بالمسؤول لتكوين معايير التقييم',
+    'all_criteria_required' => 'يجب تقييم جميع المعايير',
+    'score_out_of_range' => 'الدرجة خارج النطاق للمعيار: :criteria',
+    'score_must_be_between' => 'يجب أن تكون الدرجة بين',
+    'and' => 'و',
+    'criteria' => [
+        'name' => 'الاسم',
+        'description' => 'الوصف',
+        'min_value' => 'القيمة الدنيا',
+        'max_value' => 'القيمة القصوى',
+        'is_active' => 'نشط',
+        'score_range' => 'نطاق الدرجة',
+    ],
+    'scores' => [
+        'user' => 'المستخدم',
+        'criteria' => 'المعيار',
+        'score' => 'الدرجة',
+        'evaluated_at' => 'تاريخ التقييم',
+        'actions' => 'الإجراءات',
+    ],
+    'index' => [
+        'headline' => 'سجل التقييمات',
+        'create_evaluation' => 'إنشاء تقييم',
+    ],
+    'history' => [
+        'search' => 'البحث',
+        'search_placeholder' => 'البحث بالاسم أو البريد الإلكتروني...',
+        'date_filter' => 'فلتر التاريخ',
+        'criteria_filter' => 'فلتر المعايير',
+        'user_filter' => 'فلتر المستخدم',
+        'all_criteria' => 'جميع المعايير',
+        'all_users' => 'جميع المستخدمين',
+        'clear_filters' => 'مسح الفلاتر',
+        'no_evaluations_found' => 'لم يتم العثور على تقييمات',
+        'table' => [
+            'user' => 'المستخدم',
+            'criteria' => 'المعيار',
+            'score' => 'الدرجة',
+            'evaluated_at' => 'تاريخ التقييم',
+            'created_at' => 'تاريخ الإنشاء',
+        ],
+    ],
+]; 

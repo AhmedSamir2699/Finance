@@ -1,0 +1,56 @@
+<?php
+
+return [
+    'index'=>[
+        'title' => 'الطلبات',
+        'create' => 'إنشاء طلب',
+        'id' => 'رقم الطلب',
+        'category' => 'القسم',
+        'status' => 'الحالة',
+        'created_at' => 'تاريخ الإنشاء',
+        'updated_at' => 'تاريخ التحديث',
+        'actions' => 'الإجراءات',
+        'show' => 'عرض',
+        'edit' => 'تعديل',
+        'delete' => 'حذف',
+        'no_requests' => 'لا توجد طلبات',
+        'new_request' => 'طلب جديد',
+    ],
+    'create' => [
+        'title' => 'إنشاء طلب',
+        'select_category' => 'اختر القسم',
+        'start_new' => 'ابدأ طلب جديد',
+        'submit' => 'إرسال',
+    ],
+    'show' => [
+        'id' => 'رقم الطلب',
+        'title' => 'عنوان الطلب',
+        'category' => 'القسم',
+        'form' => 'النموذج',
+        'status' => 'الحالة',
+        'request_form' => 'نموذج الطلب',
+        'status' => 'الحالة',
+        'fields' => 'الحقول',
+        'steps' => 'الخطوات',
+        'current_step' => 'الخطوة الحالية',
+        'actions' => 'الإجراءات',
+        'approve' => 'موافقة',
+        'reject' => 'رفض',
+        'back' => 'رجوع',
+        'submitter' => [
+            'title' => 'المقدم',
+            'name' => 'الاسم',
+            'email' => 'البريد الإلكتروني',
+            'phone' => 'الهاتف',
+        ],
+        'created_at' => 'تاريخ الإنشاء',
+        'updated_at' => 'تاريخ التحديث',
+        
+    ],
+    'status' => [
+        'in_progress' => 'قيد التنفيذ',
+        'needs_attention' => 'يحتاج إلى اهتمام',
+        'approved' => 'تمت الموافقة',
+        'rejected' => 'تم الرفض',
+    ],
+];
