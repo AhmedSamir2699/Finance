@@ -20,6 +20,14 @@ class SettingsSeeder extends Seeder
                 'is_public' => true,
             ],
             [
+                'key' => 'bank_account',
+                'value' => 123000000,
+                'type' => 'double',
+                'description' => 'Application name displayed throughout the system',
+                'group' => 'general',
+                'is_public' => true,
+            ],
+            [
                 'key' => 'app_description',
                 'value' => 'نظام شامل لإدارة الموظفين وتتبع الحضور',
                 'type' => 'string',

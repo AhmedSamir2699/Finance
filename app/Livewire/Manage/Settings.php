@@ -32,7 +32,7 @@ class Settings extends Component
     {
         // Define the order we want settings to appear
         $settingOrder = [
-            'general' => ['app_name', 'app_description', 'app_logo', 'app_favicon'],
+            'general' => ['app_name', 'app_description', 'app_logo', 'app_favicon','bank_account'],
             'ui' => ['language', 'theme', 'timezone', 'date_format', 'time_format'],
             'email' => ['mail_from_name', 'mail_from_address', 'mail_signature'],
             'security' => ['session_timeout', 'password_min_length', 'login_attempts_limit', 'lockout_duration'],

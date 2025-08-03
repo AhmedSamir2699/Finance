@@ -113,6 +113,7 @@ return [
         'maintenance_message' => 'رسالة الصيانة',
         'debug_mode' => 'وضع التصحيح',
         'log_level' => 'مستوى السجل',
+        'bank_account'=>'الرصيد البنكي'
     ],
     
     // Settings Hints

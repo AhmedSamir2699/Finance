@@ -16,22 +16,7 @@
     </div>
     <nav class="mt-10">
 
-        @php
-            $election = \App\Models\Election::where('start_date', '<=', now())
-                ->where('end_date', '>=', now())
-                ->where('is_public', true)
-                ->first();
-            $sidebarLinks = \App\Models\SidebarLink::getSidebarLinks();
-        @endphp
-        
-        @if ($election)
-            <x-nav-link href="{{ route('election.show', [$election->id]) }}" :active="request()->routeIs('election.*')">
-                <i class="fa fa-vote-yea"></i>
-                <span class="mx-3">{{ $election->name }}</span>
-            </x-nav-link>
-        @endif
-
-        @foreach($sidebarLinks as $link)
+        @foreach(\App\Models\SidebarLink::getSidebarLinks() as $link)
             @if($link->children && $link->children->count() > 0)
                 @php
                     $dropdownItems = [];

@@ -7,7 +7,7 @@
         <p class="text-gray-600 mt-2">{{ __('settings.manage_all_aspects') }}</p>
 
         <!-- Quick Actions Section -->
-        <div class="mt-8">
+        {{-- <div class="mt-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg border border-gray-200">
                 <div class="p-6">
                     <h3 class="text-lg font-medium text-gray-900 mb-4">{{ __('settings.quick_actions') }}</h3>
@@ -31,7 +31,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-6">
             <!-- User Management -->
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg border border-gray-200">
@@ -56,77 +56,6 @@
                 </div>
             </div>
 
-            <!-- Department Management -->
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg border border-gray-200">
-                <div class="p-6">
-                    <div class="flex items-center">
-                        <div class="flex-shrink-0">
-                            <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
-                                <i class="fas fa-building text-green-600 text-xl"></i>
-                            </div>
-                        </div>
-                        <div class="ms-4 flex-1">
-                            <h3 class="text-lg font-medium text-gray-900">{{ __('settings.departments') }}</h3>
-                            <p class="text-sm text-gray-500">{{ __('settings.manage_organizational_structure') }}</p>
-                        </div>
-                    </div>
-                    <div class="mt-4">
-                        <a href="{{ route('manage.departments.index') }}"
-                            class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
-                            {{ __('settings.manage_departments') }}
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Elections Management -->
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg border border-gray-200">
-                <div class="p-6">
-                    <div class="flex items-center">
-                        <div class="flex-shrink-0">
-                            <div class="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center">
-                                <i class="fas fa-vote-yea text-yellow-600 text-xl"></i>
-                            </div>
-                        </div>
-                        <div class="ms-4 flex-1">
-                            <h3 class="text-lg font-medium text-gray-900">{{ __('settings.elections') }}</h3>
-                            <p class="text-sm text-gray-500">{{ __('settings.manage_voting_elections') }}</p>
-                        </div>
-                    </div>
-                    <div class="mt-4">
-                        <a href="{{ route('manage.elections.index') }}"
-                            class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-yellow-600 hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500">
-                            {{ __('settings.manage_elections') }}
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Forms Management -->
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg border border-gray-200">
-                <div class="p-6">
-                    <div class="flex items-center">
-                        <div class="flex-shrink-0">
-                            <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
-                                <i class="fas fa-clipboard-list text-blue-600 text-xl"></i>
-                            </div>
-                        </div>
-                        <div class="ms-4 flex-1">
-                            <h3 class="text-lg font-medium text-gray-900">{{ __('settings.forms') }}</h3>
-                            <p class="text-sm text-gray-500">{{ __('settings.manage_dynamic_forms_fields') }}</p>
-                        </div>
-                    </div>
-                    <div class="mt-4">
-                        <a href="{{ route('manage.forms.index') }}"
-                            class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                            {{ __('settings.manage_forms') }}
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-6">
             <!-- System Settings -->
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg border border-gray-200">
                 <div class="p-6">
@@ -145,29 +74,6 @@
                         <a href="{{ route('manage.settings.edit') }}"
                             class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
                             {{ __('settings.system_settings') }}
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Attendance Settings -->
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg border border-gray-200">
-                <div class="p-6">
-                    <div class="flex items-center">
-                        <div class="flex-shrink-0">
-                            <div class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center">
-                                <i class="fas fa-clock text-red-600 text-xl"></i>
-                            </div>
-                        </div>
-                        <div class="ms-4 flex-1">
-                            <h3 class="text-lg font-medium text-gray-900">{{ __('settings.attendance_settings') }}</h3>
-                            <p class="text-sm text-gray-500">{{ __('settings.configure_attendance_policies') }}</p>
-                        </div>
-                    </div>
-                    <div class="mt-4">
-                        <a href="{{ route('manage.attendance-settings.edit') }}"
-                            class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
-                            {{ __('settings.attendance_settings') }}
                         </a>
                     </div>
                 </div>
@@ -241,55 +147,6 @@
                     </div>
                 </div>
             </div>
-
-            <!-- Evaluation Criteria -->
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg border border-gray-200">
-                <div class="p-6">
-                    <div class="flex items-center">
-                        <div class="flex-shrink-0">
-                            <div class="w-12 h-12 bg-teal-100 rounded-lg flex items-center justify-center">
-                                <i class="fas fa-star text-teal-600 text-xl"></i>
-                            </div>
-                        </div>
-                        <div class="ms-4 flex-1">
-                            <h3 class="text-lg font-medium text-gray-900">{{ __('settings.evaluation_criteria') }}</h3>
-                            <p class="text-sm text-gray-500">{{ __('settings.manage_evaluation_methods') }}</p>
-                        </div>
-                    </div>
-                    <div class="mt-4">
-                        <a href="{{ route('manage.evaluation-criteria.index') }}"
-                            class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-teal-600 hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500">
-                            {{ __('settings.manage_evaluation_criteria') }}
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Static Pages -->
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg border border-gray-200">
-                <div class="p-6">
-                    <div class="flex items-center">
-                        <div class="flex-shrink-0">
-                            <div class="w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center">
-                                <i class="fas fa-file-alt text-indigo-600 text-xl"></i>
-                            </div>
-                        </div>
-                        <div class="ms-4 flex-1">
-                            <h3 class="text-lg font-medium text-gray-900">{{ __('static-pages.title') }}</h3>
-                            <p class="text-sm text-gray-500">{{ __('settings.manage_static_pages') }}</p>
-                        </div>
-                    </div>
-                    <div class="mt-4">
-                        <a href="{{ route('manage.static-pages.index') }}"
-                            class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                            {{ __('settings.manage_static_pages') }}
-                        </a>
-                    </div>
-                </div>
-            </div>
         </div>
-
-
-
     </div>
 </x-app-layout>

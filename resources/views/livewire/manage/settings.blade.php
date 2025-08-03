@@ -61,6 +61,12 @@
                                                value="{{ $setting['value'] }}"
                                                class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-primary-500 focus:border-primary-500 sm:text-sm">
                                         @break
+                                        @case('double')
+                                        <input type="number" 
+                                               wire:change="updateSetting('{{ $setting['key'] }}', $event.target.value)"
+                                               value="{{ $setting['value'] }}"
+                                               class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-primary-500 focus:border-primary-500 sm:text-sm">
+                                        @break
 
                                     @case('text')
                                         <textarea wire:change="updateSetting('{{ $setting['key'] }}', $event.target.value)"

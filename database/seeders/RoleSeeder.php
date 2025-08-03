@@ -16,164 +16,170 @@ class RoleSeeder extends Seeder
     public function run(): void
     {
 
-        Role::create([
+        Role::updateOrCreate([
             'name' => 'super-admin',
             'display_name' => 'مدير النظام'
         ]);
 
 
-        Role::create([
+        Role::updateOrCreate([
             'name' => 'ceo',
             'display_name' => 'الرئيس التنفيذي'
         ]);
-        Role::create([
+        Role::updateOrCreate([
             'display_name' => 'الأمين العام',
             'name' => 'secretary-general'
         ]);
-        Role::create([
+        Role::updateOrCreate([
             'display_name' => 'المدير التنفيذي',
             'name' => 'executive-director'
         ]);
 
-        Role::create([
+        Role::updateOrCreate([
             'name' => 'department-head',
             'display_name' => 'رئيس القسم'
         ]);
-        Role::create([
+        Role::updateOrCreate([
             'name' => 'employee',
             'display_name' => 'موظف'
         ]);
 
 
         // User Permissions
-        Permission::create(['name' => 'user.impersonate', 'display_name' => 'التنقل كمستخدم آخر']);
+        Permission::updateOrCreate(
+            ['name' => 'user.impersonate', 'guard_name' => 'web'],
+            ['display_name' => 'التنقل كمستخدم آخر']
+        );
 
-        Permission::create(['name' => 'user.create', 'display_name' => 'إنشاء مستخدم']);
-        Permission::create(['name' => 'user.edit', 'display_name' => 'تعديل مستخدم']);
-        Permission::create(['name' => 'user.delete', 'display_name' => 'حذف مستخدم']);
-        Permission::create(['name' => 'user.view', 'display_name' => 'عرض مستخدم']);
-        Permission::create(['name' => 'user.index', 'display_name' => 'عرض جميع المستخدمين']);
-        Permission::create(['name' => 'user.assign-role', 'display_name' => 'تعيين دور للمستخدم']);
-        Permission::create(['name' => 'user.remove-role', 'display_name' => 'إزالة دور من المستخدم']);
-        Permission::create(['name' => 'user.assign-department', 'display_name' => 'تعيين قسم للمستخدم']);
+        Permission::updateOrCreate(['name' => 'user.create', 'display_name' => 'إنشاء مستخدم', 'guard_name' => 'web']);
+        Permission::updateOrCreate(['name' => 'user.edit', 'display_name' => 'تعديل مستخدم', 'guard_name' => 'web']);
+        Permission::updateOrCreate(['name' => 'user.delete', 'display_name' => 'حذف مستخدم', 'guard_name' => 'web']);
+        Permission::updateOrCreate(['name' => 'user.view', 'display_name' => 'عرض مستخدم', 'guard_name' => 'web']);
+        Permission::updateOrCreate(['name' => 'user.index', 'display_name' => 'عرض جميع المستخدمين', 'guard_name' => 'web']);
+        Permission::updateOrCreate(['name' => 'user.assign-role', 'display_name' => 'تعيين دور للمستخدم', 'guard_name' => 'web']);
+        Permission::updateOrCreate(['name' => 'user.remove-role', 'display_name' => 'إزالة دور من المستخدم', 'guard_name' => 'web']);
+        Permission::updateOrCreate(['name' => 'user.assign-department', 'display_name' => 'تعيين قسم للمستخدم', 'guard_name' => 'web']);
 
         // Department Permissions
-        Permission::create(['name' => 'department.view-self', 'display_name' => 'عرض القسم الخاص']);
-        Permission::create(['name' => 'department.view-any', 'display_name' => 'عرض الأقسام لأي شخص']);
-        Permission::create(['name' => 'department.view-subordinates', 'display_name' => 'عرض الأقسام للمرؤوسين']);
-        Permission::create(['name' => 'department.view-members', 'display_name' => 'عرض أعضاء القسم']);
-        Permission::create(['name' => 'department.create', 'display_name' => 'إنشاء قسم']);
-        Permission::create(['name' => 'department.edit', 'display_name' => 'تعديل قسم']);
-        Permission::create(['name' => 'department.delete', 'display_name' => 'حذف قسم']);
-        Permission::create(['name' => 'department.index', 'display_name' => 'عرض جميع الأقسام']);
+        Permission::updateOrCreate(['name' => 'department.view-self', 'display_name' => 'عرض القسم الخاص', 'guard_name' => 'web']);
+        Permission::updateOrCreate(['name' => 'department.view-any', 'display_name' => 'عرض الأقسام لأي شخص', 'guard_name' => 'web']);
+        Permission::updateOrCreate(['name' => 'department.view-subordinates', 'display_name' => 'عرض الأقسام للمرؤوسين', 'guard_name' => 'web']);
+        Permission::updateOrCreate(['name' => 'department.view-members', 'display_name' => 'عرض أعضاء القسم', 'guard_name' => 'web']);
+        Permission::updateOrCreate(['name' => 'department.create', 'display_name' => 'إنشاء قسم', 'guard_name' => 'web']);
+        Permission::updateOrCreate(['name' => 'department.edit', 'display_name' => 'تعديل قسم', 'guard_name' => 'web']);
+        Permission::updateOrCreate(['name' => 'department.delete', 'display_name' => 'حذف قسم', 'guard_name' => 'web']);
+        Permission::updateOrCreate(['name' => 'department.index', 'display_name' => 'عرض جميع الأقسام', 'guard_name' => 'web']);
 
         // Role Permissions
-        Permission::create(['name' => 'role.create', 'display_name' => 'إنشاء دور']);
-        Permission::create(['name' => 'role.edit', 'display_name' => 'تعديل دور']);
-        Permission::create(['name' => 'role.delete', 'display_name' => 'حذف دور']);
-        Permission::create(['name' => 'role.view', 'display_name' => 'عرض دور']);
-        Permission::create(['name' => 'role.index', 'display_name' => 'عرض جميع الأدوار']);
-        Permission::create(['name' => 'role.assign-permission', 'display_name' => 'تعيين صلاحية للدور']);
+        Permission::updateOrCreate(['name' => 'role.create', 'display_name' => 'إنشاء دور', 'guard_name' => 'web']);
+        Permission::updateOrCreate(['name' => 'role.edit', 'display_name' => 'تعديل دور', 'guard_name' => 'web']);
+        Permission::updateOrCreate(['name' => 'role.delete', 'display_name' => 'حذف دور', 'guard_name' => 'web']);
+        Permission::updateOrCreate(['name' => 'role.view', 'display_name' => 'عرض دور', 'guard_name' => 'web']);
+        Permission::updateOrCreate(['name' => 'role.index', 'display_name' => 'عرض جميع الأدوار', 'guard_name' => 'web']);
+        Permission::updateOrCreate(['name' => 'role.assign-permission', 'display_name' => 'تعيين صلاحية للدور', 'guard_name' => 'web']);
 
         // Message Permissions
-        Permission::create(['name' => 'message.create', 'display_name' => 'إنشاء رسالة']);
-        Permission::create(['name' => 'message.delete', 'display_name' => 'حذف رسالة']);
-        Permission::create(['name' => 'message.view', 'display_name' => 'عرض رسالة']);
-        Permission::create(['name' => 'message.index', 'display_name' => 'عرض جميع الرسائل']);
-        Permission::create(['name' => 'message.reply', 'display_name' => 'الرد على الرسالة']);
+        Permission::updateOrCreate(['name' => 'message.create', 'display_name' => 'إنشاء رسالة', 'guard_name' => 'web']);
+        Permission::updateOrCreate(['name' => 'message.delete', 'display_name' => 'حذف رسالة', 'guard_name' => 'web']);
+        Permission::updateOrCreate(['name' => 'message.view', 'display_name' => 'عرض رسالة', 'guard_name' => 'web']);
+        Permission::updateOrCreate(['name' => 'message.index', 'display_name' => 'عرض جميع الرسائل', 'guard_name' => 'web']);
+        Permission::updateOrCreate(['name' => 'message.reply', 'display_name' => 'الرد على الرسالة', 'guard_name' => 'web']);
 
         // Request Permissions
-        Permission::create(['name' => 'request.create', 'display_name' => 'إنشاء طلب']);
-        Permission::create(['name' => 'request.edit', 'display_name' => 'تعديل طلب']);
-        Permission::create(['name' => 'request.delete', 'display_name' => 'حذف طلب']);
-        Permission::create(['name' => 'request.view', 'display_name' => 'عرض طلب']);
-        Permission::create(['name' => 'request.view-any', 'display_name' => 'عرض طلب لأي شخص']);
-        Permission::create(['name' => 'request.index', 'display_name' => 'عرض جميع الطلبات']);
-        Permission::create(['name' => 'request.approve', 'display_name' => 'إعتماد الطلب']);
+        Permission::updateOrCreate(['name' => 'request.create', 'display_name' => 'إنشاء طلب', 'guard_name' => 'web']);
+        Permission::updateOrCreate(['name' => 'request.edit', 'display_name' => 'تعديل طلب', 'guard_name' => 'web']);
+        Permission::updateOrCreate(['name' => 'request.delete', 'display_name' => 'حذف طلب', 'guard_name' => 'web']);
+        Permission::updateOrCreate(['name' => 'request.view', 'display_name' => 'عرض طلب', 'guard_name' => 'web']);
+        Permission::updateOrCreate(['name' => 'request.view-any', 'display_name' => 'عرض طلب لأي شخص', 'guard_name' => 'web']);
+        Permission::updateOrCreate(['name' => 'request.index', 'display_name' => 'عرض جميع الطلبات', 'guard_name' => 'web']);
+        Permission::updateOrCreate(['name' => 'request.approve', 'display_name' => 'إعتماد الطلب', 'guard_name' => 'web']);
 
         // Task Permissions
-        Permission::create(['name' => 'task.create', 'display_name' => 'إنشاء مهمة']);
-        Permission::create(['name' => 'task.edit', 'display_name' => 'تعديل مهمة']);
-        Permission::create(['name' => 'task.delete', 'display_name' => 'حذف مهمة']);
-        Permission::create(['name' => 'task.view', 'display_name' => 'عرض مهمة']);
-        Permission::create(['name' => 'task.index', 'display_name' => 'عرض جميع المهام']);
-        Permission::create(['name' => 'task.assign', 'display_name' => 'تعيين مهمة']);
-        Permission::create(['name' => 'task.view-any', 'display_name' => 'عرض المهام لأي شخص']);
-        Permission::create(['name' => 'task.edit-any', 'display_name' => 'تعديل المهام لأي شخص']);
-        Permission::create(['name' => 'task.create-any', 'display_name' => 'إنشاء مهمة لأي شخص']);
-        Permission::create(['name' => 'task.delete-any', 'display_name' => 'حذف المهام لأي شخص']);
-        Permission::create(['name' => 'task.view-department', 'display_name' => 'عرض المهام للقسم']);
-        Permission::create(['name' => 'task.edit-department', 'display_name' => 'تعديل المهام للقسم']);
-        Permission::create(['name' => 'task.create-department', 'display_name' => 'إنشاء مهمة للقسم']);
-        Permission::create(['name' => 'task.delete-department', 'display_name' => 'حذف المهام للقسم']);
-        Permission::create(['name' => 'task.index-department', 'display_name' => 'عرض المهام للقسم']);
-        Permission::create(['name' => 'task.approve-department', 'display_name' => 'إعتماد المهمة للقسم']);
-        Permission::create(['name' => 'task.reject-department', 'display_name' => 'رفض المهمة للقسم']);
-        Permission::create(['name' => 'task.comment-department', 'display_name' => 'التعليق على المهمة للقسم']);
-        Permission::create(['name' => 'task.view-subordinates', 'display_name' => 'عرض المهام للمرؤوسين']);
-        Permission::create(['name' => 'task.approve-subordinates', 'display_name' => 'إعتماد المهمة للمرؤوسين']);
-        Permission::create(['name' => 'task.comment', 'display_name' => 'التعليق على المهمة']);
-        Permission::create(['name' => 'task.view-history', 'display_name' => 'عرض تاريخ المهمة']);
+        Permission::updateOrCreate(['name' => 'task.create', 'display_name' => 'إنشاء مهمة', 'guard_name' => 'web']);
+        Permission::updateOrCreate(['name' => 'task.edit', 'display_name' => 'تعديل مهمة', 'guard_name' => 'web']);
+        Permission::updateOrCreate(['name' => 'task.delete', 'display_name' => 'حذف مهمة', 'guard_name' => 'web']);
+        Permission::updateOrCreate(['name' => 'task.view', 'display_name' => 'عرض مهمة', 'guard_name' => 'web']);
+        Permission::updateOrCreate(['name' => 'task.index', 'display_name' => 'عرض جميع المهام', 'guard_name' => 'web']);
+        Permission::updateOrCreate(['name' => 'task.assign', 'display_name' => 'تعيين مهمة', 'guard_name' => 'web']);
+        Permission::updateOrCreate(['name' => 'task.view-any', 'display_name' => 'عرض المهام لأي شخص', 'guard_name' => 'web']);
+        Permission::updateOrCreate(['name' => 'task.edit-any', 'display_name' => 'تعديل المهام لأي شخص', 'guard_name' => 'web']);
+        Permission::updateOrCreate(['name' => 'task.create-any', 'display_name' => 'إنشاء مهمة لأي شخص', 'guard_name' => 'web']);
+        Permission::updateOrCreate(['name' => 'task.delete-any', 'display_name' => 'حذف المهام لأي شخص', 'guard_name' => 'web']);
+        Permission::updateOrCreate(['name' => 'task.view-department', 'display_name' => 'عرض المهام للقسم', 'guard_name' => 'web']);
+        Permission::updateOrCreate(['name' => 'task.edit-department', 'display_name' => 'تعديل المهام للقسم', 'guard_name' => 'web']);
+        Permission::updateOrCreate(['name' => 'task.create-department', 'display_name' => 'إنشاء مهمة للقسم', 'guard_name' => 'web']);
+        Permission::updateOrCreate(['name' => 'task.delete-department', 'display_name' => 'حذف المهام للقسم', 'guard_name' => 'web']);
+        Permission::updateOrCreate(['name' => 'task.index-department', 'display_name' => 'عرض المهام للقسم', 'guard_name' => 'web']);
+        Permission::updateOrCreate(['name' => 'task.approve-department', 'display_name' => 'إعتماد المهمة للقسم', 'guard_name' => 'web']);
+        Permission::updateOrCreate(['name' => 'task.reject-department', 'display_name' => 'رفض المهمة للقسم', 'guard_name' => 'web']);
+        Permission::updateOrCreate(['name' => 'task.comment-department', 'display_name' => 'التعليق على المهمة للقسم', 'guard_name' => 'web']);
+        Permission::updateOrCreate(['name' => 'task.view-subordinates', 'display_name' => 'عرض المهام للمرؤوسين', 'guard_name' => 'web']);
+        Permission::updateOrCreate(['name' => 'task.approve-subordinates', 'display_name' => 'إعتماد المهمة للمرؤوسين', 'guard_name' => 'web']);
+        Permission::updateOrCreate(['name' => 'task.comment', 'display_name' => 'التعليق على المهمة', 'guard_name' => 'web']);
+        Permission::updateOrCreate(['name' => 'task.view-history', 'display_name' => 'عرض تاريخ المهمة', 'guard_name' => 'web']);
 
         // Executive Plan Permissions
-        Permission::create(['name' => 'executive-plan.view-self', 'display_name' => 'عرض الخطة التنفيذية الخاصة']);
-        Permission::create(['name' => 'executive-plan.edit-self', 'display_name' => 'تعديل الخطة التنفيذية الخاصة']);
-        Permission::create(['name' => 'executive-plan.export-self', 'display_name' => 'تصدير الخطة التنفيذية الخاصة']);
-        Permission::create(['name' => 'executive-plan.view-any', 'display_name' => 'عرض الخطة التنفيذية لأي شخص']);
-        Permission::create(['name' => 'executive-plan.edit-any', 'display_name' => 'تعديل الخطة التنفيذية لأي شخص']);
-        Permission::create(['name' => 'executive-plan.export-any', 'display_name' => 'تصدير الخطة التنفيذية لأي شخص']);
-        Permission::create(['name' => 'executive-plan.view-department', 'display_name' => 'عرض الخطة التنفيذية للقسم']);
-        Permission::create(['name' => 'executive-plan.edit-department', 'display_name' => 'تعديل الخطة التنفيذية للقسم']);
-        Permission::create(['name' => 'executive-plan.export-department', 'display_name' => 'تصدير الخطة التنفيذية للقسم']);
-        Permission::create(['name' => 'executive-plan.view-subordinates', 'display_name' => 'عرض الخطة التنفيذية للمرؤوسين']);
-        Permission::create(['name' => 'executive-plan.edit-subordinates', 'display_name' => 'تعديل الخطة التنفيذية للمرؤوسين']);
-        Permission::create(['name' => 'executive-plan.export-subordinates', 'display_name' => 'تصدير الخطة التنفيذية للمرؤوسين']);
+        Permission::updateOrCreate(['name' => 'executive-plan.view-self', 'display_name' => 'عرض الخطة التنفيذية الخاصة', 'guard_name' => 'web']);
+        Permission::updateOrCreate(['name' => 'executive-plan.edit-self', 'display_name' => 'تعديل الخطة التنفيذية الخاصة', 'guard_name' => 'web']);
+        Permission::updateOrCreate(['name' => 'executive-plan.export-self', 'display_name' => 'تصدير الخطة التنفيذية الخاصة', 'guard_name' => 'web']);
+        Permission::updateOrCreate(['name' => 'executive-plan.view-any', 'display_name' => 'عرض الخطة التنفيذية لأي شخص', 'guard_name' => 'web']);
+        Permission::updateOrCreate(['name' => 'executive-plan.edit-any', 'display_name' => 'تعديل الخطة التنفيذية لأي شخص', 'guard_name' => 'web']);
+        Permission::updateOrCreate(['name' => 'executive-plan.export-any', 'display_name' => 'تصدير الخطة التنفيذية لأي شخص', 'guard_name' => 'web']);
+        Permission::updateOrCreate(['name' => 'executive-plan.view-department', 'display_name' => 'عرض الخطة التنفيذية للقسم', 'guard_name' => 'web']);
+        Permission::updateOrCreate(['name' => 'executive-plan.edit-department', 'display_name' => 'تعديل الخطة التنفيذية للقسم', 'guard_name' => 'web']);
+        Permission::updateOrCreate(['name' => 'executive-plan.export-department', 'display_name' => 'تصدير الخطة التنفيذية للقسم', 'guard_name' => 'web']);
+        Permission::updateOrCreate(['name' => 'executive-plan.view-subordinates', 'display_name' => 'عرض الخطة التنفيذية للمرؤوسين', 'guard_name' => 'web']);
+        Permission::updateOrCreate(['name' => 'executive-plan.edit-subordinates', 'display_name' => 'تعديل الخطة التنفيذية للمرؤوسين', 'guard_name' => 'web']);
+        Permission::updateOrCreate(['name' => 'executive-plan.export-subordinates', 'display_name' => 'تصدير الخطة التنفيذية للمرؤوسين', 'guard_name' => 'web']);
 
 
         // Management Permissions
-        Permission::create(['name' => 'manage.executive-plan', 'display_name' => 'إدارة الخطة التنفيذية']);
-        Permission::create(['name' => 'manage.departments', 'display_name' => 'إدارة الأقسام']);
-        Permission::create(['name' => 'manage.users', 'display_name' => 'إدارة المستخدمين']);
-        Permission::create(['name' => 'manage.roles', 'display_name' => 'إدارة الأدوار']);
-        Permission::create(['name' => 'manage.permissions', 'display_name' => 'إدارة الصلاحيات']);
-        Permission::create(['name' => 'manage.forms', 'display_name' => 'إدارة النماذج']);
-        Permission::create(['name' => 'manage.logs', 'display_name' => 'إدارة السجلات']);
-        Permission::create(['name' => 'manage.settings', 'display_name' => 'إدارة الإعدادات']);
+        Permission::updateOrCreate(['name' => 'manage.executive-plan', 'display_name' => 'إدارة الخطة التنفيذية', 'guard_name' => 'web']);
+        Permission::updateOrCreate(['name' => 'manage.departments', 'display_name' => 'إدارة الأقسام', 'guard_name' => 'web']);
+        Permission::updateOrCreate(['name' => 'manage.users', 'display_name' => 'إدارة المستخدمين', 'guard_name' => 'web']);
+        Permission::updateOrCreate(['name' => 'manage.roles', 'display_name' => 'إدارة الأدوار', 'guard_name' => 'web']);
+        Permission::updateOrCreate(['name' => 'manage.permissions', 'display_name' => 'إدارة الصلاحيات', 'guard_name' => 'web']);
+        Permission::updateOrCreate(['name' => 'manage.forms', 'display_name' => 'إدارة النماذج', 'guard_name' => 'web']);
+        Permission::updateOrCreate(['name' => 'manage.logs', 'display_name' => 'إدارة السجلات', 'guard_name' => 'web']);
+        Permission::updateOrCreate(['name' => 'manage.settings', 'display_name' => 'إدارة الإعدادات', 'guard_name' => 'web']);
         
 
         // Evaluation Permissions
-        Permission::create(['name' => 'evaluate', 'display_name' => 'تقييم الأداء']);
-        Permission::create(['name' => 'evaluate.view', 'display_name' => 'عرض تقييم الأداء']);
-        Permission::create(['name' => 'evaluate.create', 'display_name' => 'إنشاء تقييم الأداء']);
-        Permission::create(['name' => 'evaluate.edit', 'display_name' => 'تعديل تقييم الأداء']);
-        Permission::create(['name' => 'evaluate.delete', 'display_name' => 'حذف تقييم الأداء']);
-        Permission::create(['name' => 'evaluate.index', 'display_name' => 'عرض جميع تقييمات الأداء']);
+        Permission::updateOrCreate(['name' => 'evaluate', 'display_name' => 'تقييم الأداء', 'guard_name' => 'web']);
+        Permission::updateOrCreate(['name' => 'evaluate.view', 'display_name' => 'عرض تقييم الأداء', 'guard_name' => 'web']);
+        Permission::updateOrCreate(['name' => 'evaluate.create', 'display_name' => 'إنشاء تقييم الأداء', 'guard_name' => 'web']);
+        Permission::updateOrCreate(['name' => 'evaluate.edit', 'display_name' => 'تعديل تقييم الأداء', 'guard_name' => 'web']);
+        Permission::updateOrCreate(['name' => 'evaluate.delete', 'display_name' => 'حذف تقييم الأداء', 'guard_name' => 'web']);
+        Permission::updateOrCreate(['name' => 'evaluate.index', 'display_name' => 'عرض جميع تقييمات الأداء', 'guard_name' => 'web']);
 
         
         // Daily Evaluation Report Permissions
-        Permission::create(['name' => 'daily-evaluation-report.view', 'display_name' => 'عرض تقرير التقييم اليومي']);
-        Permission::create(['name' => 'daily-evaluation-report.export', 'display_name' => 'تصدير تقرير التقييم اليومي']);
-        Permission::create(['name' => 'daily-evaluation-report.index', 'display_name' => 'عرض جميع تقارير التقييم اليومي']);
-        Permission::create(['name' => 'daily-evaluation-report.view-any', 'display_name' => 'عرض تقرير التقييم اليومي لأي شخص']);
-        Permission::create(['name' => 'daily-evaluation-report.export-any', 'display_name' => 'تصدير تقرير التقييم اليومي لأي شخص']);
+        Permission::updateOrCreate(['name' => 'daily-evaluation-report.view', 'display_name' => 'عرض تقرير التقييم اليومي', 'guard_name' => 'web']);
+        Permission::updateOrCreate(['name' => 'daily-evaluation-report.export', 'display_name' => 'تصدير تقرير التقييم اليومي', 'guard_name' => 'web']);
+        Permission::updateOrCreate(['name' => 'daily-evaluation-report.index', 'display_name' => 'عرض جميع تقارير التقييم اليومي', 'guard_name' => 'web']);
+        Permission::updateOrCreate(['name' => 'daily-evaluation-report.view-any', 'display_name' => 'عرض تقرير التقييم اليومي لأي شخص', 'guard_name' => 'web']);
+        Permission::updateOrCreate(['name' => 'daily-evaluation-report.export-any', 'display_name' => 'تصدير تقرير التقييم اليومي لأي شخص', 'guard_name' => 'web']);
 
         // Monthly Evaluation Report Permissions
-        Permission::create(['name' => 'monthly-evaluation-report.view', 'display_name' => 'عرض تقرير التقييم الشهري']);
-        Permission::create(['name' => 'monthly-evaluation-report.export', 'display_name' => 'تصدير تقرير التقييم الشهري']);
-        Permission::create(['name' => 'monthly-evaluation-report.index', 'display_name' => 'عرض جميع تقارير التقييم الشهري']);
-        Permission::create(['name' => 'monthly-evaluation-report.view-any', 'display_name' => 'عرض تقرير التقييم الشهري لأي شخص']);
-        Permission::create(['name' => 'monthly-evaluation-report.export-any', 'display_name' => 'تصدير تقرير التقييم الشهري لأي شخص']);
+        Permission::updateOrCreate(['name' => 'monthly-evaluation-report.view', 'display_name' => 'عرض تقرير التقييم الشهري', 'guard_name' => 'web']);
+        Permission::updateOrCreate(['name' => 'monthly-evaluation-report.export', 'display_name' => 'تصدير تقرير التقييم الشهري', 'guard_name' => 'web']);
+        Permission::updateOrCreate(['name' => 'monthly-evaluation-report.index', 'display_name' => 'عرض جميع تقارير التقييم الشهري', 'guard_name' => 'web']);
+        Permission::updateOrCreate(['name' => 'monthly-evaluation-report.view-any', 'display_name' => 'عرض تقرير التقييم الشهري لأي شخص', 'guard_name' => 'web']);
+        Permission::updateOrCreate(['name' => 'monthly-evaluation-report.export-any', 'display_name' => 'تصدير تقرير التقييم الشهري لأي شخص', 'guard_name' => 'web']);
 
         // Yearly Evaluation Report Permissions
-        Permission::create(['name' => 'yearly-evaluation-report.view', 'display_name' => 'عرض تقرير التقييم السنوي']);
-        Permission::create(['name' => 'yearly-evaluation-report.export', 'display_name' => 'تصدير تقرير التقييم السنوي']);
-        Permission::create(['name' => 'yearly-evaluation-report.index', 'display_name' => 'عرض جميع تقارير التقييم السنوي']);
-        Permission::create(['name' => 'yearly-evaluation-report.view-any', 'display_name' => 'عرض تقرير التقييم السنوي لأي شخص']);
-        Permission::create(['name' => 'yearly-evaluation-report.export-any', 'display_name' => 'تصدير تقرير التقييم السنوي لأي شخص']);
+        Permission::updateOrCreate(['name' => 'yearly-evaluation-report.view', 'display_name' => 'عرض تقرير التقييم السنوي', 'guard_name' => 'web']);
+        Permission::updateOrCreate(['name' => 'yearly-evaluation-report.export', 'display_name' => 'تصدير تقرير التقييم السنوي', 'guard_name' => 'web']);
+        Permission::updateOrCreate(['name' => 'yearly-evaluation-report.index', 'display_name' => 'عرض جميع تقارير التقييم السنوي', 'guard_name' => 'web']);
+        Permission::updateOrCreate(['name' => 'yearly-evaluation-report.view-any', 'display_name' => 'عرض تقرير التقييم السنوي لأي شخص', 'guard_name' => 'web']);
+        Permission::updateOrCreate(['name' => 'yearly-evaluation-report.export-any', 'display_name' => 'تصدير تقرير التقييم السنوي لأي شخص', 'guard_name' => 'web']);
 
         // Summary Report Permissions
-        Permission::create(['name' => 'summary.view', 'display_name' => 'عرض التقرير الملخص']);
+        Permission::updateOrCreate(['name' => 'summary.view', 'display_name' => 'عرض التقرير الملخص', 'guard_name' => 'web']);
 
+
+        // Expenese
+        Permission::updateOrCreate(['name' => 'expense_access', 'display_name' => 'الدخول الي المصروفات', 'guard_name' => 'web']);
 
 
 
