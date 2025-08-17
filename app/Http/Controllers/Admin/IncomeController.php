@@ -35,26 +35,26 @@ class IncomeController extends Controller
         $income_categories = IncomeCategory::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
         $finance_items = $this->buildFinanceItemOptions();
-        return view('admin.incomes.create', compact('finance_items', 'income_categories','breadcrumbs'));
+        return view('admin.incomes.create', compact('finance_items', 'income_categories', 'breadcrumbs'));
     }
 
     public function buildFinanceItemOptions()
-{
-    // Get only leaf items (items with no children)
-    $leafItems = FinanceItem::doesntHave('children')->get();
+    {
+        // Get only leaf items (items with no children)
+        $leafItems = FinanceItem::doesntHave('children')->get();
 
-    // Also fetch all items to build the full names
-    $allItems = FinanceItem::all();
+        // Also fetch all items to build the full names
+        $allItems = FinanceItem::all();
 
-    $options = [];
+        $options = [];
 
-    foreach ($leafItems as $item) {
-        $fullName = $this->buildFullName($item, $allItems);
-        $options[$item->id] = $fullName;
+        foreach ($leafItems as $item) {
+            $fullName = $this->buildFullName($item, $allItems);
+            $options[$item->id] = $fullName;
+        }
+
+        return $options;
     }
-
-    return $options;
-}
 
 
     private function buildFullName($item, $allItems, $separator = ' > ')
@@ -89,9 +89,9 @@ class IncomeController extends Controller
         $breadcrumbs = [
             route('dashboard') => __('breadcrumbs.dashboard.index'),
             route('incomes') => __('breadcrumbs.incomes'),
-            route('incomes.edit',$income)
+            route('incomes.edit', $income)
         ];
-        return view('admin.incomes.edit', compact('finance_items', 'income', 'income_categories','breadcrumbs'));
+        return view('admin.incomes.edit', compact('finance_items', 'income', 'income_categories', 'breadcrumbs'));
     }
 
     public function update(UpdateIncomeRequest $request, Income $income)

@@ -5,7 +5,7 @@ return [
     'total_expenses'=>'مجموع المصروفات',
     'total_incomes'=>'مجموع الأيرادات',
 'total_budget'=>'موازنة الجمعية',
-
+'no_data'                        =>'لا يوجد بياناتا',
     'actions'                        => 'العمليات',
     'add'                            => 'إضافة',
     'allRightsReserved'              => 'كافة الحقوق محفوظة',

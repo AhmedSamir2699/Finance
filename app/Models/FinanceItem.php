@@ -75,4 +75,10 @@ class FinanceItem extends Model
             ->sum('amount');
     }
 
+    public function childrenRecursive()
+{
+    return $this->children()->with('childrenRecursive');
+}
+
+
 }

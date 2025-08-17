@@ -2,6 +2,7 @@
 
 return [
     'actions'                        => 'Actions',
+    'no_data'                        =>'No Data',
     'add'                            => 'Add',
     'allRightsReserved'              => 'All rights reserved.',
     'areYouSure'                     => 'Are you sure?',

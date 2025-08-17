@@ -4,7 +4,7 @@
             <livewire:finance-items.cards />
         </div>
         <div class="flex flex-col">
-            <livewire:finance-items.drag-drop />
+            <livewire:finance-items.index />
         </div>
     </div>
 </x-app-layout>

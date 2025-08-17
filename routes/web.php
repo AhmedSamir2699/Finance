@@ -146,28 +146,20 @@ Route::middleware('auth')->group(function () {
     Route::delete('incomes/{income}', [IncomeController::class, 'destroy'])
         ->name('incomes.destroy');
 
-    // // Expense Report
-    // Route::delete('expense-reports/destroy', 'ExpenseReportController@massDestroy')->name('expense-reports.massDestroy');
-    // Route::resource('expense-reports', 'ExpenseReportController');
 
     // Finance Items
-// ✅ Correct Route
-Route::get('finance-items/destroy/{financeItem}', [FinanceItemsController::class, 'destroy'])
-    ->name('finance-items.destroy');
-    // Route::post('finance-items/parse-csv-import', 'FinanceItemsController@parseCsvImport')->name('finance-items.parseCsvImport');
-    // Route::post('finance-items/process-csv-import', 'FinanceItemsController@processCsvImport')->name('finance-items.processCsvImport');
-    // Route::resource('finance-items', 'FinanceItemsController');
+    Route::delete('finance-items/destroy/{financeItem}', [FinanceItemsController::class, 'destroy'])
+        ->name('finance-items.destroy');
     Route::get('finance-items', [FinanceItemsController::class, 'index'])->name('finance-items');
+    Route::get('finance-items/create', [FinanceItemsController::class, 'create'])->name('finance-items.create');
     Route::post('finance-items/store', [FinanceItemsController::class, 'store'])->name('finance-items.store');
+    Route::get('finance-items/{financeItem}/edit', [FinanceItemsController::class, 'edit'])
+        ->name('finance-items.edit');
+
+    Route::post('finance-items/{financeItem}/update', [FinanceItemsController::class, 'update'])
+        ->name('finance-items.update');
     Route::post('finance-items/reorder', [FinanceItemsController::class, 'reorder'])->name('finance-items.reorder');
-    // });
-
-
-
-
-
-
-
+    Route::get('/finance-items/{parent}', [FinanceItemsController::class, 'index'])->name('finance-items.children');
 
 
     // Impersonate routes

@@ -217,7 +217,7 @@ return [
     ],
     'financeItem' => [
         'title'          => 'Finance Items',
-        'title_singular' => 'Finance Item',
+        'title_singular' => 'بند',
         'fields'         => [
             'id'                => 'ID',
             'id_helper'         => ' ',
@@ -231,7 +231,7 @@ return [
             'updated_at_helper' => ' ',
             'deleted_at'        => 'Deleted at',
             'deleted_at_helper' => ' ',
-            'parent'            => 'Parent',
+            'parent'            => 'تابع ل',
             'parent_helper'     => ' ',
         ],
     ],

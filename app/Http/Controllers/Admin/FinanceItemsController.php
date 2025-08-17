@@ -34,11 +34,20 @@ class FinanceItemsController extends Controller
 
     public function create()
     {
-        abort_if(Gate::denies('finance_item_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        // abort_if(Gate::denies('finance_item_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $parents = FinanceItem::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        return view('admin.financeItems.create', compact('parents'));
+        
+
+         $breadcrumbs = [
+            route('dashboard') => __('breadcrumbs.dashboard.index'),
+            route('finance-items') => __('breadcrumbs.finance-items'),
+            route('finance-items.create')
+        ];
+   
+        return view('admin.financeItems.create', compact('parents','breadcrumbs'));
+
     }
 
     public function store(StoreFinanceItemRequest $request)
@@ -50,13 +59,17 @@ class FinanceItemsController extends Controller
 
     public function edit(FinanceItem $financeItem)
     {
-        abort_if(Gate::denies('finance_item_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        // abort_if(Gate::denies('finance_item_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $parents = FinanceItem::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
         $financeItem->load('parent');
-
-        return view('admin.financeItems.edit', compact('financeItem', 'parents'));
+        $breadcrumbs = [
+            route('dashboard') => __('breadcrumbs.dashboard.index'),
+            route('finance-items') => __('breadcrumbs.finance-items'),
+            route('finance-items.edit',$financeItem)
+        ];
+        return view('admin.financeItems.edit', compact('financeItem', 'parents','breadcrumbs'));
     }
 
     public function update(UpdateFinanceItemRequest $request, FinanceItem $financeItem)
