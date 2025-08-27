@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Livewire\FinanceItems;
+namespace App\Livewire\Budgets;
 
+use App\Models\Budget;
 use App\Models\FinanceItem;
 use Livewire\Component;
 
@@ -9,22 +10,13 @@ class Cards extends Component
 {
     public function render()
     {
-        $totalBudget = FinanceItem::totalLeafAmount();
-
         $totalBudget = 0;
-        $items = FinanceItem::whereNull('parent_id')->get();
-        foreach ($items as $item) {
-            // load full subtree once
-            $node = FinanceItem::with('childrenRecursive')->find($item->id);
 
-            $subtree = $this->sumSubtree($node); // self + descendants
-            $self = (float) ($node->amount ?? 0);
-            $totalBudget += $subtree;
-        }
+        $items = Budget::get();
+        $totalBudget = $items->sum('amount');
+       
 
-        
-
-        return view('livewire.finance-items.cards', [
+        return view('livewire.budgets.cards', [
             'totalBudget' => $totalBudget,
         ]);
     }

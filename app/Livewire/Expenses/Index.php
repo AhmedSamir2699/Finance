@@ -23,7 +23,7 @@ class Index extends Component
         $expenses = Expense::query()
             ->orderBy('id', 'desc')
             ->paginate($this->perPage);
-
-        return view('livewire.expenses.index', compact('expenses'));
+$totalexpenses = Expense::totalLeafAmount();
+        return view('livewire.expenses.index', compact('expenses','totalexpenses'));
     }
 }

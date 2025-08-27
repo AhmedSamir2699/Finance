@@ -132,7 +132,7 @@
                             @endif
                         </td>
                         <td class="px-4 py-2">{{ $item->parent->name ?? '' }}</td>
-                        <td class="px-4 py-2">{{ number_format($branchTotals[$item->id] ?? 0, 0) }}</td>
+                        <td class="px-4 py-2">{{ number_format($branchTotals[$item->id] ?? 0, 0) }} {{ __('global.currency') }}</td>
                         <td class="px-4 py-2 space-x-1">
                             <a href="{{ route('finance-items.edit', $item) }}"
                                 class="text-yellow-600 hover:underline">{{ __('global.edit') }}

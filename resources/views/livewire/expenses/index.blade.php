@@ -29,7 +29,8 @@
     @endpush
     <div style="margin-bottom: 10px;" class="row">
         <div class="col-lg-12">
-            <a class="rounded bg-blue-600 text-white px-4 py-2 hover:bg-blue-700 transition" href="{{route('expenses.create')}}">
+            <a class="rounded bg-blue-600 text-white px-4 py-2 hover:bg-blue-700 transition"
+                href="{{ route('expenses.create') }}">
                 {{ trans('global.add') }} {{ trans('cruds.expense.title_singular') }}
             </a>
         </div>
@@ -101,54 +102,63 @@
                     <th class="px-4 py-2">{{ __('cruds.expense.fields.id') }}</th>
                     <th class="px-4 py-2">{{ __('cruds.expense.fields.expense_category') }}</th>
                     <th class="px-4 py-2">{{ __('cruds.expense.fields.entry_date') }}</th>
-                    <th class="px-4 py-2">{{ __('cruds.expense.fields.amount') }}</th>
-                    <th class="px-4 py-2">{{ __('cruds.expense.fields.description') }}</th>
+                    <th class="px-4 py-2">الميزانية المتوفرة</th>
+                    <th class="px-4 py-2">المصروف</th>
+                    <th class="px-4 py-2">المتبقي</th>
                     <th class="px-4 py-2">{{ __('cruds.expense.fields.finance_item') }}</th>
                     <th class="px-4 py-2">{{ __('global.actions') }}</th>
                 </tr>
             </thead>
             <tbody>
                 @forelse($expenses as $expense)
+                    @php
+                        $fi = $expense->finance_item;
+
+                        $spentRow = (float) ($expense->amount ?? 0); // this expense only
+                        $branchBudget = $fi ? $fi->branchBudgetTotal() : 0.0; // sum(finance_items.amount) over branch
+                        $branchExpense = $fi ? $fi->branchExpenseTotal() : 0.0; // sum(expenses.amount) over branch
+                        $branchRemain = $branchBudget - $branchExpense; // remaining branch budget
+                    @endphp
+
                     <tr class="bg-white border-b hover:bg-gray-50">
                         <td class="px-4 py-2">{{ $expense->id }}</td>
                         <td class="px-4 py-2">{{ $expense->expense_category->name ?? '' }}</td>
-                        <td class="px-4 py-2">{{ $expense->entry_date ?? '' }}</td>
-                        <td class="px-4 py-2">{{ $expense->amount ?? '' }}</td>
-                        <td class="px-4 py-2">{{ $expense->description ?? '' }}</td>
-                        <td class="px-4 py-2">{{ $expense->finance_item->name ?? '' }}</td>
-                        <td class="px-4 py-2 space-x-1">
-                            {{-- @can('expense_show')
-                                <a href="{{ route('expenses.show', $expense) }}"
-                                    class="text-blue-500 hover:underline">{{ __('global.view') }}</a>
-                            @endcan --}}
-                            {{-- @can('expense_edit') --}}
-                                <a href="{{ route('expenses.edit', $expense) }}"
-                                    class="text-yellow-600 hover:underline">{{ __('global.edit') }}
-                                </a>
-                            {{-- @endcan --}}
-                            {{-- @can('expense_delete') --}}
-                                <form action="{{ route('expenses.destroy', $expense->id) }}"
-                                    method="POST"
-                                    onsubmit="return confirm('هل أنت متأكد من حذف هذا التصنيف؟');"
-                                    class="inline">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="text-red-500 hover:underline">
-                                        {{ __('global.delete') }}
-                                    </button>
-                                </form>
+                        <td class="px-4 py-2">{{ $expense->entry_date}}</td>
 
-                            {{-- @endcan --}}
+                        {{-- Branch budget (available) --}}
+                        <td class="px-4 py-2">{{ number_format($branchBudget, 2) }} {{ __('global.currency') }}</td>
+
+                        {{-- This expense --}}
+                        <td class="px-4 py-2">{{ number_format($spentRow, 2) }} {{ __('global.currency') }}</td>
+
+                        {{-- Branch remaining --}}
+                        <td class="px-4 py-2">{{ number_format($branchRemain, 2) }} {{ __('global.currency') }}</td>
+
+                        <td class="px-4 py-2">{{ $fi->name ?? '—' }}</td>
+
+                        <td class="px-4 py-2 space-x-1">
+                            <a href="{{ route('expenses.edit', $expense) }}" class="text-yellow-600 hover:underline">
+                                {{ __('global.edit') }}
+                            </a>
+                            <form action="{{ route('expenses.destroy', $expense->id) }}" method="POST"
+                                onsubmit="return confirm('هل أنت متأكد من حذف هذا التصنيف؟');" class="inline">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="text-red-500 hover:underline">
+                                    {{ __('global.delete') }}
+                                </button>
+                            </form>
                         </td>
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="3" class="text-center py-4 text-gray-500">
-                            {{ __('global.no_data') }}
-                        </td>
+                        <td colspan="9" class="text-center py-4 text-gray-500">{{ __('global.no_data') }}</td>
                     </tr>
                 @endforelse
             </tbody>
+
+
+
         </table>
     </div>
 

@@ -29,26 +29,33 @@ class SidebarLinkSeeder extends Seeder
                 'permission' => null,
                 'order' => 1,
             ],
+             [
+                'title' => 'الميزانيات',
+                'url' => 'budgets',
+                'icon' => 'fa fa-tags',
+                'permission' => null,
+                'order' => 2,
+            ],
             [
                 'title' => 'انواع الايرادات',
                 'url' => 'income-categories',
                 'icon' => 'fa fa-plus-circle',
                 'permission' => null,
-                'order' => 2,
+                'order' => 3,
             ],
             [
                 'title' => 'انواع المصروفات',
                 'url' => 'expense-categories',
                 'icon' => 'fa fa-plus-circle',
                 'permission' => null,
-                'order' => 3,
+                'order' => 4,
             ],
             [
                 'title' => 'الايرادات',
                 'url' => 'incomes',
                 'icon' => 'fa fa-credit-card',
                 'permission' => null,
-                'order' => 4,
+                'order' => 5,
             ],
 
             [
@@ -56,7 +63,7 @@ class SidebarLinkSeeder extends Seeder
                 'url' => 'expenses',
                 'icon' => 'fa fa-minus-circle',
                 'permission' => 'expense_access',
-                'order' => 8,
+                'order' => 6,
             ],
 
             // [

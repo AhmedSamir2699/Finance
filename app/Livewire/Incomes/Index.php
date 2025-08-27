@@ -9,7 +9,7 @@ use Livewire\WithPagination;
 
 class Index extends Component
 {
-     use WithPagination;
+    use WithPagination;
 
     public $search = '';
     public $perPage = 10;
@@ -22,6 +22,10 @@ class Index extends Component
     {
         $incomes = Income::query()
             ->orderBy('id', 'desc')
+            ->with([
+                'income_category',
+                'allocations.financeItem',   // <-- needed for the table
+            ])
             ->paginate($this->perPage);
 
         return view('livewire.incomes.index', compact('incomes'));

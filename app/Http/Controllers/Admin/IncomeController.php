@@ -8,6 +8,9 @@ use App\Http\Requests\StoreIncomeRequest;
 use App\Http\Requests\UpdateIncomeRequest;
 use App\Models\FinanceItem;
 use App\Models\Income;
+use App\Models\IncomeAllocation;
+use Illuminate\Support\Facades\DB;
+use InvalidArgumentException;
 use App\Models\IncomeCategory;
 use Gate;
 use Illuminate\Http\Request;
@@ -72,33 +75,132 @@ class IncomeController extends Controller
 
     public function store(StoreIncomeRequest $request)
     {
-        $income = Income::create($request->all());
+        return DB::transaction(function () use ($request) {
+            // create income first
+            $income = Income::create($request->only([
+                'income_category_id',
+                'entry_date',
+                'amount',
+                'description'
+            ]));
 
-        return redirect()->route('incomes');
+            // applyPercentAndUpdateItems allocations
+            $this->applyPercentAndUpdateItems($income, $request->input('allocations', []));
+
+            return redirect()->route('incomes')->with('success', __('Income saved and allocated.'));
+        });
+    }
+
+    public function applyPercentAndUpdateItems(Income $income, array $allocations): void
+    {
+        DB::transaction(function () use ($income, $allocations) {
+            $totalAmount = (float) $income->amount;
+            if ($totalAmount <= 0)
+                throw new InvalidArgumentException('Income amount must be > 0.');
+
+            // Revert previous allocations from item totals
+            $previous = $income->allocations()->get();
+            foreach ($previous as $row) {
+                FinanceItem::whereKey($row->finance_item_id)
+                    ->update(['amount' => DB::raw('amount - ' . (float) $row->amount)]);
+            }
+            $income->allocations()->delete();
+
+            // Compute + persist
+            $sumPct = 0.0;
+            foreach ($allocations as $a) {
+                $sumPct += (float) ($a['percentage'] ?? 0);
+            }
+            if ($sumPct > 100.0 + 0.01) {
+                throw new InvalidArgumentException('Total percentages cannot exceed 100%.');
+            }
+
+            foreach ($allocations as $a) {
+                $fi = (int) $a['finance_item_id'];
+                $pct = (float) $a['percentage'];
+                $amt = round($totalAmount * $pct / 100, 2, PHP_ROUND_HALF_EVEN);
+
+                IncomeAllocation::create([
+                    'income_id' => $income->id,
+                    'finance_item_id' => $fi,
+                    'percentage' => $pct,
+                    'amount' => $amt,
+                ]);
+
+                FinanceItem::whereKey($fi)
+                    ->update(['amount' => DB::raw('amount + ' . (float) $amt)]);
+            }
+        });
+    }
+
+    public function revertAndDelete(Income $income): void
+    {
+        DB::transaction(function () use ($income) {
+            $allocs = $income->allocations()->get();
+            foreach ($allocs as $row) {
+                FinanceItem::whereKey($row->finance_item_id)
+                    ->update(['amount' => DB::raw('amount - ' . (float) $row->amount)]);
+            }
+            $income->allocations()->delete();
+        });
     }
 
     public function edit(Income $income)
     {
-        // abort_if(Gate::denies('income_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        // $income already loaded
+        $income->load(['income_category', 'finance_item', 'allocations.financeItem']);
 
         $income_categories = IncomeCategory::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
-
         $finance_items = $this->buildFinanceItemOptions();
 
-        $income->load('income_category', 'finance_item');
+        // Build prefill for the repeater (percent-based)
+        $prefill = $income->allocations->map(fn($a) => [
+            'finance_item_id' => $a->finance_item_id,
+            'percentage' => (float) $a->percentage, // we stored it before
+            'amount' => (float) $a->amount,     // helpful for preview
+        ])->values();
+
         $breadcrumbs = [
             route('dashboard') => __('breadcrumbs.dashboard.index'),
             route('incomes') => __('breadcrumbs.incomes'),
-            route('incomes.edit', $income)
+            route('incomes.edit', $income),
         ];
-        return view('admin.incomes.edit', compact('finance_items', 'income', 'income_categories', 'breadcrumbs'));
+
+        return view('admin.incomes.edit', compact(
+            'income',
+            'income_categories',
+            'finance_items',
+            'breadcrumbs'
+        ))->with('allocationsPrefill', $prefill);
     }
 
     public function update(UpdateIncomeRequest $request, Income $income)
     {
-        $income->update($request->all());
+       
+        return DB::transaction(function () use ($request, $income) {
+            $income->update($request->only([
+                'income_category_id',
+                'entry_date',
+                'amount',
+                'description'
+            ]));
 
-        return redirect()->route('incomes');
+            $this->applyPercentAndUpdateItems($income, $request->input('allocations', []));
+
+            return redirect()->route('incomes')->with('success', __('Income updated and allocations applied.'));
+        });
+    }
+
+
+
+    public function destroy(Income $income)
+    {
+        // abort_if(Gate::denies('income_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        $this->revertAndDelete($income); // subtract from items and delete allocations
+        $income->delete();
+
+        return back()->with('success', __('Income deleted and item totals reverted.'));
     }
 
     public function show(Income $income)
@@ -110,14 +212,14 @@ class IncomeController extends Controller
         return view('admin.incomes.show', compact('income'));
     }
 
-    public function destroy(Income $income)
-    {
-        abort_if(Gate::denies('income_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+    // public function destroy(Income $income)
+    // {
+    //     abort_if(Gate::denies('income_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $income->delete();
+    //     $income->delete();
 
-        return back();
-    }
+    //     return back();
+    // }
 
     public function massDestroy(MassDestroyIncomeRequest $request)
     {

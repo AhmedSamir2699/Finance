@@ -47,8 +47,24 @@ class Income extends Model
         return $this->belongsTo(FinanceItem::class, 'finance_item_id');
     }
 
-     public static function totalLeafAmount()
+    public static function totalLeafAmount()
     {
         return self::get()->sum('amount');
+    }
+
+    public function allocations()
+    {
+        return $this->hasMany(IncomeAllocation::class);
+    }
+
+    public function allocatedTotal(): float
+    {
+        return (float) $this->allocations()->sum('amount');
+    }
+
+    public function getUnallocatedAmountAttribute(): float
+    {
+        $allocated = (float) ($this->allocations->sum('amount') ?: $this->allocations()->sum('amount'));
+        return round(((float) $this->amount - $allocated), 2);
     }
 }

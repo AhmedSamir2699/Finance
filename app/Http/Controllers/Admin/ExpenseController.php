@@ -12,7 +12,7 @@ use App\Models\FinanceItem;
 use Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
-
+use Illuminate\Support\Facades\DB;
 class ExpenseController extends Controller
 {
     public function index()
@@ -70,9 +70,19 @@ class ExpenseController extends Controller
 
     public function store(StoreExpenseRequest $request)
     {
-        $expense = Expense::create($request->all());
+        // On create: subtract amount from the selected finance_item amount
+        return DB::transaction(function () use ($request) {
+            $expense = Expense::create($request->only([
+                'expense_category_id', 'entry_date', 'amount', 'description', 'finance_item_id'
+            ]));
 
-        return redirect()->route('expenses');
+            if ($expense->finance_item_id) {
+                FinanceItem::whereKey($expense->finance_item_id)
+                    ->update(['amount' => DB::raw('amount - '.(float)$expense->amount)]);
+            }
+
+            return redirect()->route('expenses')->with('success', __('Expense saved and item total updated.'));
+        });
     }
 
     public function edit(Expense $expense)

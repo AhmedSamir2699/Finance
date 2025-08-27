@@ -233,6 +233,30 @@ return [
             'parent_helper'     => ' ',
         ],
     ],
+
+    'budgets' => [
+        'title'          => 'budgets Items',
+        'title_singular' => 'budgets Item',
+        'fields'         => [
+            'id'                => 'ID',
+            'id_helper'         => ' ',
+            'name'              => 'Name',
+            'name_helper'       => ' ',
+            'amount'            => 'Amount',
+            'amount_helper'     => ' ',
+            'goal'            => 'Goal',
+            'goal_helper'     => ' ',
+            'created_at'        => 'Created at',
+            'created_at_helper' => ' ',
+            'updated_at'        => 'Updated at',
+            'updated_at_helper' => ' ',
+            'deleted_at'        => 'Deleted at',
+            'deleted_at_helper' => ' ',
+            'parent'            => 'Parent',
+            'parent_helper'     => ' ',
+        ],
+    ],
+
     'userAlert' => [
         'title'          => 'User Alerts',
         'title_singular' => 'User Alert',

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\BudgetController;
 use App\Http\Controllers\Admin\ExpenseCategoryController;
 use App\Http\Controllers\Admin\ExpenseController;
 use App\Http\Controllers\Admin\FinanceItemsController;
@@ -160,6 +161,17 @@ Route::middleware('auth')->group(function () {
         ->name('finance-items.update');
     Route::post('finance-items/reorder', [FinanceItemsController::class, 'reorder'])->name('finance-items.reorder');
     Route::get('/finance-items/{parent}', [FinanceItemsController::class, 'index'])->name('finance-items.children');
+
+    // --- Budgets CRUD managed by BudgetController ---
+Route::get('budgets', [BudgetController::class, 'index'])->name('budgets');
+
+Route::get('budgets/create', [BudgetController::class, 'create'])->name('budgets.create');
+Route::post('budgets', [BudgetController::class, 'store'])->name('budgets.store');
+
+Route::get('budgets/{budget}/edit', [BudgetController::class, 'edit'])->name('budgets.edit');
+Route::put('budgets/{budget}', [BudgetController::class, 'update'])->name('budgets.update');   // or ->patch(...)
+Route::delete('budgets/{budget}', [BudgetController::class, 'destroy'])->name('budgets.destroy');
+
 
 
     // Impersonate routes

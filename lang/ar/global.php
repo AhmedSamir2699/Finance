@@ -328,6 +328,6 @@ return [
     'calendar'                       => 'التقويم',
     'messenger'                      => 'مراسل',
     'optional'                       => 'اختياري',
-    'currency'                       => 'س.ر',
+    'currency'                       => 'ر.س',
 ];
 

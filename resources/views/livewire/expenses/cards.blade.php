@@ -5,7 +5,7 @@
                 <i class="fas fa-coins text-white fa-lg"></i>
             </div>
             <div class="mx-5">
-                <h4 class="text-2xl font-semibold text-gray-700">{{$totalexpenses}}</h4>
+                <h4 class="text-2xl font-semibold text-gray-700"> {{ number_format($totalexpenses, 2)}} {{ __('global.currency') }} </h4>
                 <div class="text-gray-500">{{ __('global.total_expenses') }}</div>
             </div>
         </a>
